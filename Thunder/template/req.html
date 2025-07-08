@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ heading }}</title>
+    <title>RM Mσʋιҽ Fʅιx - {{ file_name }}</title>
 
-    <meta name="description" content="Easily share and distribute files">
-    <meta property="og:title" content="Thunder FileToLink">
-    <meta property="og:description" content="File Streamer">
+    <meta name="description" content="Premium streaming experience with RM Mσʋιҽ Fʅιx">
+    <meta property="og:title" content="RM Mσʋιҽ Fʅιx">
+    <meta property="og:description" content="Premium Streaming Platform">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/live.png">
-    <meta name="theme-color" content="#1a1a2e">
-    <meta name="msapplication-navbutton-color" content="#1a1a2e">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#1a1a2e">
+    <meta name="theme-color" content="#0f0c29">
+    <meta name="msapplication-navbutton-color" content="#0f0c29">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0f0c29">
     <meta name="color-scheme" content="dark light">
-    <meta name="application-name" content="Thunder FileToLink">
+    <meta name="application-name" content="RM Mσʋιҽ Fʅιx">
     
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/Thunder.jpg">
     <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/Thunder.jpg">
@@ -23,6 +23,117 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
 
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --secondary: #ff2a6d;
+            --dark: #0f0c29;
+            --darker: #090618;
+            --light: #d1c4e9;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        /* Enhanced UI Elements */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.7), 
+                         0 0 20px rgba(255, 42, 109, 0.5);
+        }
+        
+        .neon-border {
+            border: 1px solid transparent;
+            border-image: var(--gradient) 1;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Header Styling */
+        .header {
+            position: relative;
+            padding-bottom: 15px;
+            border-bottom: 2px solid transparent;
+            border-image: var(--gradient) 1;
+        }
+        
+        /* Player Enhancements */
+        .player-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Control Section */
+        .controls-section {
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 25px;
+        }
+        
+        /* Buttons */
+        .action-button {
+            background: var(--gradient);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(138, 43, 226, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background: rgba(15, 12, 41, 0.7);
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        
+        /* New Elements */
+        .channel-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .channel-btn {
+            background: var(--gradient);
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .channel-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(138, 43, 226, 0.5);
+        }
+        
+        .report-container {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/reqstyle.css">
 </head>
 <body>
@@ -38,13 +149,13 @@
     <div class="container">
         <header class="header">
             <div class="file-info">
-                <h1 id="file-name">{{ file_name }}</h1>
+                <h1 id="file-name" class="glow-text">RM Mσʋιҽ Fʅιx - {{ file_name }}</h1>
                 <div class="file-meta"></div>
             </div>
         </header>
 
         <main id="main-content" role="main" aria-label="Main content">
-            <div class="player-container">
+            <div class="player-container neon-border pulse">
                 <{{ tag }} id="player" playsinline controls preload="metadata" controlsList="nodownload">
                 <source src="{{ src }}" type="{{ tag }}/mp4">
                     Your browser does not support the {{ tag }} tag.
@@ -145,12 +256,34 @@
                 </div>
                 <button type="button" class="action-button secondary-button" onclick="app.download()" title="Download the video"><i class="fas fa-cloud-download-alt" aria-hidden="true"></i><span>Download</span></button>
                 <button type="button" class="action-button secondary-button" onclick="app.copyLink()" title="Copy video link"><i class="fas fa-link" aria-hidden="true"></i><span>Copy Link</span></button>
+                <button type="button" class="action-button secondary-button" id="reportButton" title="Report issues"><i class="fas fa-flag" aria-hidden="true"></i><span>Report</span></button>
             </section>
+            
+            <div class="channel-buttons">
+                <a href="https://t.me/RahatMx" target="_blank" class="channel-btn">
+                    <i class="fab fa-telegram"></i> Updates Channel
+                </a>
+                <a href="https://t.me/RahatMx" target="_blank" class="channel-btn">
+                    <i class="fab fa-github"></i> Source Code
+                </a>
+            </div>
+            
+            <div class="report-container">
+                <p>Found broken links or inappropriate content? Report immediately!</p>
+                <button class="action-button" onclick="app.reportContent()">
+                    <i class="fas fa-exclamation-triangle"></i> Report Content
+                </button>
+            </div>
         </main>
     </div>
 
     <footer>
-        <p>Made by AI © 2025 | <a href="https://github.com/fyaz05/FileToLink" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></p>
+        <p>Made by RMxBots © 2025 | Premium Streaming Experience</p>
+        <div class="footer-links">
+            <a href="https://t.me/RMxBots" target="_blank">Telegram Channel</a> | 
+            <a href="https://t.me/RahatMx" target="_blank">Report Issues</a> | 
+            <a href="https://t.me/RahatMx" target="_blank">Request Content</a>
+        </div>
     </footer>
 
     <div class="toast" id="toast" role="alert" aria-live="polite" aria-hidden="true">
@@ -160,5 +293,45 @@
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/reqscript.js"></script>
+    
+    <script>
+        // Enhanced functionality
+        const app = window.app || {};
+        
+        // Report content function
+        app.reportContent = function() {
+            const file = "{{ file_name }}";
+            const url = `https://t.me/RahatMx?start=report_${encodeURIComponent(file)}`;
+            window.open(url, '_blank');
+            app.showToast('Report initiated via Telegram');
+        };
+        
+        // Show toast notification
+        app.showToast = function(message) {
+            const toast = document.getElementById('toast');
+            toast.querySelector('.toast-message').textContent = message;
+            toast.setAttribute('aria-hidden', 'false');
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.setAttribute('aria-hidden', 'true');
+            }, 3000);
+        };
+        
+        // Content warning system
+        document.addEventListener('DOMContentLoaded', () => {
+            const player = document.getElementById('player');
+            
+            // Check for potential NSFW content
+            if ("{{ file_name }}".match(/nsfw|adult|explicit/i)) {
+                if(confirm('This content may contain sensitive material. Proceed?')) {
+                    player.play().catch(e => console.log('Auto-play prevented'));
+                } else {
+                    window.location.href = 'https://t.me/RahatMx';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
