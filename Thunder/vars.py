@@ -31,7 +31,7 @@ class Var:
     WORKERS: int = int(os.getenv("WORKERS", "8"))
     TIMEOUT: int = int(os.getenv("TIMEOUT", "90"))
 
-    BIN_CHANNEL: int = int(os.getenv("BIN_CHANNEL", "1002409391347"))
+    BIN_CHANNEL: int = int(os.getenv("BIN_CHANNEL", "-1002409391347"))
 
     if not BIN_CHANNEL:
         logger.critical("BIN_CHANNEL is required")
