@@ -4,14 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RM Mσʋιҽ Fʅιx - Premium Streaming</title>
-    
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <!-- Plyr Player -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    
     <style>
         :root {
             --primary: #8e44ad;
@@ -540,6 +535,36 @@
             100% { transform: translateY(-1000px) translateX(1000px); opacity: 0; }
         }
         
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(20, 20, 35, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .toast i {
+            font-size: 24px;
+            color: var(--success);
+        }
+        
         /* Responsive */
         @media (max-width: 1100px) {
             .main-layout {
@@ -574,6 +599,10 @@
             
             .controls-section {
                 flex-direction: column;
+            }
+            
+            .file-name {
+                font-size: 20px;
             }
         }
     </style>
@@ -633,9 +662,9 @@
                 <div class="player-container">
                     <video id="player" playsinline controls>
                         <source src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/sample.mp4" type="video/mp4">
-                        <track kind="captions" label="English" srclang="en" src="#" default>
-                        <track kind="captions" label="Spanish" srclang="es" src="#">
-                        <track kind="captions" label="French" srclang="fr" src="#">
+                        <track kind="captions" label="English" srclang="en" src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/sample.vtt" default>
+                        <track kind="captions" label="Spanish" srclang="es" src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/sample.vtt">
+                        <track kind="captions" label="French" srclang="fr" src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/sample.vtt">
                     </video>
                 </div>
                 
@@ -652,21 +681,21 @@
                 
                 <!-- Player Controls -->
                 <div class="controls-section">
-                    <button class="action-button primary">
+                    <button class="action-button primary" id="play-btn">
                         <i class="fas fa-play"></i>
                         <span>Play Now</span>
                     </button>
-                    <button class="action-button">
+                    <button class="action-button" id="download-btn">
                         <i class="fas fa-cloud-download-alt"></i>
                         <span>Download</span>
                     </button>
-                    <button class="action-button">
-                        <i class="fas fa-external-link-alt"></i>
-                        <span>Stream Options</span>
-                    </button>
-                    <button class="action-button">
+                    <button class="action-button" id="copy-btn">
                         <i class="fas fa-copy"></i>
                         <span>Copy Link</span>
+                    </button>
+                    <button class="action-button" id="stream-btn">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Stream Options</span>
                     </button>
                 </div>
             </div>
@@ -679,56 +708,56 @@
                 </h2>
                 
                 <div class="player-grid">
-                    <div class="player-card">
+                    <div class="player-card" data-player="vlc">
                         <div class="player-icon">
                             <i class="fab fa-vimeo-v"></i>
                         </div>
                         <div class="player-name">VLC Player</div>
                     </div>
                     
-                    <div class="player-card">
+                    <div class="player-card" data-player="mxpro">
                         <div class="player-icon">
                             <i class="fas fa-play"></i>
                         </div>
                         <div class="player-name">MX Player Pro</div>
                     </div>
                     
-                    <div class="player-card">
+                    <div class="player-card" data-player="nplayer">
                         <div class="player-icon">
                             <i class="fas fa-film"></i>
                         </div>
                         <div class="player-name">nPlayer</div>
                     </div>
                     
-                    <div class="player-card">
+                    <div class="player-card" data-player="km">
                         <div class="player-icon">
                             <i class="fas fa-video"></i>
                         </div>
                         <div class="player-name">KM Player</div>
                     </div>
                     
-                    <div class="player-card">
+                    <div class="player-card" data-player="splayer">
                         <div class="player-icon">
                             <i class="fas fa-play-circle"></i>
                         </div>
                         <div class="player-name">S Player</div>
                     </div>
                     
-                    <div class="player-card">
+                    <div class="player-card" data-player="potplayer">
                         <div class="player-icon">
                             <i class="fas fa-desktop"></i>
                         </div>
                         <div class="player-name">PotPlayer</div>
                     </div>
                     
-                    <div class="player-card">
+                    <div class="player-card" data-player="mpc">
                         <div class="player-icon">
                             <i class="fas fa-laptop"></i>
                         </div>
                         <div class="player-name">MPC-HC</div>
                     </div>
                     
-                    <div class="player-card">
+                    <div class="player-card" data-player="kmpc">
                         <div class="player-icon">
                             <i class="fas fa-gamepad"></i>
                         </div>
@@ -796,8 +825,8 @@
             </h2>
             
             <div class="about-content">
-                <p>Thunder Streaming is a premium file sharing and streaming service that provides high-quality video content with lightning-fast delivery. Our platform supports multiple streaming options, direct downloads, and seamless integration with popular media players.</p>
-                <p>You get guaranteed high-quality content with multiple subtitle options and optimized streaming performance.</p>
+                <p>RM Mσʋιҽ Fʅιx is a premium file sharing and streaming service that provides high-quality video content with lightning-fast delivery. Our platform supports multiple streaming options, direct downloads, and seamless integration with popular media players.</p>
+                <p>With our premium prefix, you get guaranteed high-quality content with multiple subtitle options and optimized streaming performance.</p>
             </div>
             
             <div class="social-buttons">
@@ -827,7 +856,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p><span class="thunder-text">⚡ Thunder Streaming</span> © <span id="current-year"></span> | Premium File Sharing Platform</p>
+            <p><span class="thunder-text">⚡ RM Mσʋιҽ Fʅιx</span> © <span id="current-year"></span> | Premium File Sharing Platform</p>
             <div class="footer-links">
                 <a href="#" class="footer-link">Terms of Service</a>
                 <a href="#" class="footer-link">Privacy Policy</a>
@@ -836,6 +865,12 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <div class="toast-message">Link copied to clipboard!</div>
+    </div>
     
     <!-- Plyr Player -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
@@ -880,6 +915,19 @@
             }
         }
         
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = toast.querySelector('.toast-message');
+            toastMessage.textContent = message;
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
         // Initialize the page
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
@@ -905,6 +953,36 @@
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'translateY(0)';
                 });
+            });
+            
+            // Player card click handler
+            const playerCards = document.querySelectorAll('.player-card');
+            playerCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const playerType = this.getAttribute('data-player');
+                    showToast(`Opening in ${this.querySelector('.player-name').textContent}`);
+                });
+            });
+            
+            // Download button
+            document.getElementById('download-btn').addEventListener('click', function() {
+                showToast('Download started!');
+            });
+            
+            // Copy button
+            document.getElementById('copy-btn').addEventListener('click', function() {
+                navigator.clipboard.writeText(window.location.href);
+                showToast('Link copied to clipboard!');
+            });
+            
+            // Play button
+            document.getElementById('play-btn').addEventListener('click', function() {
+                player.play();
+            });
+            
+            // Stream button
+            document.getElementById('stream-btn').addEventListener('click', function() {
+                document.querySelector('.players-section').scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
