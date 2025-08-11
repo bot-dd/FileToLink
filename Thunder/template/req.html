@@ -1,490 +1,152 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RM Mσʋιҽ Fʅιx- {{ file_name }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RM Mσʋιҽ Fʅιx- {{ heading }}</title>
 
-  <!-- Metadata -->
-  <meta name="description" content="Premium file streamer — RM Mσʋιҽ Fʅιx" />
-  <meta name="theme-color" content="#0f1724" />
-  <link rel="icon" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/Thunder.jpg">
+    <!-- Social Meta Tags -->
+    <meta name="description" content="Easily share and distribute files">
+    <meta property="og:title" content="RM Stream">
+    <meta property="og:description" content="An Advance File Stream Web By [RM Movie Flix]">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/live.png">
+    
+    <!-- Configuration -->
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="msapplication-navbutton-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1a1a2e">
+    <meta name="color-scheme" content="dark light">
+    <meta name="application-name" content="Thunder FileToLink">
+    
+    <!-- Icons -->
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/Thunder.jpg">
+    <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/Thunder.jpg">
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- External Resources -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
 
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-
-  <style>
-    :root{
-      --bg:#071029; --card:#0f1724; --muted:#8b98a9; --accent:#7c5cff;
-      --glass: rgba(255,255,255,0.03);
-      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    html,body{height:100%; margin:0; background:linear-gradient(180deg,#030417 0%, #071029 60%); color:#e6eef8; -webkit-font-smoothing:antialiased;}
-    .container{max-width:1150px; margin:32px auto; padding:28px; border-radius:18px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow:0 10px 40px rgba(2,6,23,0.65); backdrop-filter: blur(8px);}
-    header{display:flex; gap:20px; align-items:center;}
-    .logo{width:72px; height:72px; border-radius:12px; overflow:hidden; flex:0 0 72px; box-shadow: 0 6px 18px rgba(124,92,255,0.12); border:1px solid rgba(255,255,255,0.03);}
-    .logo img{width:100%; height:100%; object-fit:cover; display:block;}
-    .title-block{flex:1; min-width:0;}
-    h1{margin:0; font-size:20px; font-weight:700; letter-spacing:0.6px; color:#fff;}
-    .subline{margin-top:6px; color:var(--muted); font-size:13px; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .badge{background:linear-gradient(90deg,var(--accent),#4bb6ff); color:#04101a; font-weight:700; padding:4px 10px; border-radius:999px; font-size:12px; box-shadow:0 6px 18px rgba(124,92,255,0.12);}
-    .meta {color:var(--muted); font-size:13px;}
-    .controls-row{display:flex; gap:10px; align-items:center; margin-top:18px; flex-wrap:wrap}
-
-    /* Player area */
-    .player-area{margin-top:20px; display:grid; grid-template-columns: 1fr 340px; gap:20px;}
-    @media (max-width:980px){ .player-area{grid-template-columns:1fr; } .right-col{order:2}}
-    .player-card{background:var(--card); border-radius:12px; padding:14px; box-shadow:0 8px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.03);}
-    .video-wrap{position:relative; border-radius:12px; overflow:hidden; min-height:320px;}
-    .player-controls-row{display:flex; gap:8px; align-items:center; justify-content:space-between; margin-top:10px;}
-    .btn{display:inline-flex; gap:8px; align-items:center; padding:10px 12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); color:#e9f2ff; cursor:pointer; font-weight:600; font-size:14px;}
-    .btn.secondary{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.02);}
-    .btn:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(0,0,0,0.5);}
-
-    /* Right column (streams & details) */
-    .right-col{display:flex; flex-direction:column; gap:14px;}
-    .section-title{font-weight:700; color:#fff; font-size:14px; margin-bottom:8px;}
-    .player-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
-    .player-card-btn{display:flex; gap:10px; align-items:center; padding:10px; border-radius:10px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.02); cursor:pointer; transition:transform .18s ease, box-shadow .18s ease;}
-    .player-card-btn img{width:28px; height:28px; object-fit:contain; border-radius:6px;}
-    .player-name{font-weight:700; font-size:13px; color:#fff;}
-    .player-desc{font-size:12px; color:var(--muted);}
-    .hover-glow{box-shadow: 0 8px 30px rgba(124,92,255,0.12);}
-
-    /* about */
-    .about{margin-top:24px; padding:18px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0)); border:1px solid rgba(255,255,255,0.02);}
-    .about p{color:var(--muted); margin:8px 0 0 0; font-size:14px;}
-    .tg-buttons{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;}
-    .tg-btn{background:linear-gradient(90deg,#00a2ff,#0077ff); padding:10px 12px; color:#fff; border-radius:10px; display:inline-flex; gap:8px; align-items:center; text-decoration:none; font-weight:700;}
-
-    footer{margin-top:18px; color:var(--muted); font-size:13px; text-align:center;}
-    .toast{position:fixed; right:18px; bottom:18px; background:linear-gradient(180deg,#061027,#0b1630); padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); box-shadow:0 10px 30px rgba(0,0,0,0.6); display:flex; gap:10px; align-items:center; transform:translateY(20px); opacity:0; pointer-events:none; transition:all .28s ease;}
-    .toast.show{opacity:1; transform:translateY(0); pointer-events:auto;}
-    .toast .icon{font-size:18px; color:#9fd7ff;}
-
-    /* big details */
-    .file-details{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:8px;}
-    .detail-pill{background:var(--glass); padding:6px 10px; border-radius:10px; color:var(--muted); font-weight:600; font-size:13px; border:1px solid rgba(255,255,255,0.02);}
-    .format-list{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;}
-    .format-item{background:transparent; color:var(--muted); padding:6px 8px; border-radius:8px; font-size:13px; border:1px dashed rgba(255,255,255,0.02);}
-
-    /* subtle animated background */
-    .bg-orb{position:fixed; right:-120px; top:-120px; width:420px; height:420px; background:radial-gradient(circle at 30% 30%, rgba(124,92,255,0.18), transparent 30%), radial-gradient(circle at 70% 70%, rgba(75,182,255,0.09), transparent 30%); filter:blur(48px); z-index:-1; transform: rotate(6deg);}
-
-    /* accessibility focus */
-    button:focus, a:focus {outline:2px solid rgba(124,92,255,0.26); outline-offset:3px; border-radius:8px;}
-  </style>
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/style.css">
 </head>
 <body>
-  <div class="bg-orb" aria-hidden="true"></div>
+    <button class="theme-toggle button-base" aria-label="Toggle Light/Dark Mode" aria-pressed="false" title="Toggle Light/Dark Mode">
+        <i class="fas fa-moon" aria-hidden="true"></i>
+    </button>
 
-  <div class="container" role="main">
-    <header>
-      <div class="logo" aria-hidden="true">
-        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/Thunder.jpg" alt="RM Movie Flix logo">
-      </div>
+    <div class="background-animation" aria-hidden="true">
+        <div class="bg-gradient"></div>
+    </div>
 
-      <div class="title-block">
-        <h1>RM Mσʋιҽ Fʅιx - {{ file_name }}</h1>
-        <div class="subline" role="list">
-          <span class="badge">Premium Stream</span>
-          <span class="meta">Uploaded: <strong id="upload-date">{{ upload_date }}</strong></span>
-          <span id="file-size" class="meta">Size: {{ file_size }}</span>
-          <span class="meta">Formats: <strong class="format-list-inline">MP4, WEBM, MKV</strong></span>
-        </div>
-
-        <div class="controls-row" aria-hidden="false">
-          <button id="btn-download" class="btn" title="Download">
-            <i class="fas fa-cloud-download-alt"></i> Download
-          </button>
-
-          <button id="btn-copy" class="btn secondary" title="Copy link to clipboard">
-            <i class="fas fa-copy"></i> Copy Link
-          </button>
-
-          <button id="btn-share" class="btn secondary" title="Share">
-            <i class="fas fa-share-alt"></i> Share
-          </button>
-
-          <div style="margin-left:auto" aria-hidden="true">
-            <span class="detail-pill">Views: <strong id="views-count">—</strong></span>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section class="player-area" aria-label="Player and streaming options">
-      <div class="player-card">
-        <div class="video-wrap" aria-label="Video player container">
-          <!-- Plyr video element -->
-          <video id="player" playsinline controls crossorigin="anonymous">
-            <!-- Multiple sources; server/template must provide real URLs -->
-            <source src="{{ src_mp4 }}" type="video/mp4" size="1080" data-quality="1080p">
-            <source src="{{ src_webm }}" type="video/webm" size="720" data-quality="720p">
-            <source src="{{ src_mkv }}" type="video/x-matroska" size="480" data-quality="480p">
-
-            <!-- Subtitles -->
-            <track kind="subtitles" label="English" srclang="en" src="{{ subtitle_en }}" default>
-            <track kind="subtitles" label="বাংলা" srclang="bn" src="{{ subtitle_bn }}">
-
-            <p>Your browser does not support HTML5 video. <a href="{{ src_mp4 }}">Download</a></p>
-          </video>
-        </div>
-
-        <div class="player-controls-row">
-          <div style="display:flex; gap:8px;">
-            <button id="btn-speed" class="btn secondary" title="Speed">Speed</button>
-            <button id="btn-quality" class="btn secondary" title="Quality">Quality</button>
-            <button id="btn-subtitles" class="btn secondary" title="Subtitle options">Subtitles</button>
-          </div>
-          <div>
-            <span class="detail-pill">Current: <span id="current-quality">Auto</span></span>
-          </div>
-        </div>
-
-        <div style="margin-top:14px" class="file-details">
-          <span class="detail-pill">Codec: H.264 / AAC</span>
-          <span class="detail-pill">Resolution: 1080p</span>
-          <span class="detail-pill">Container: MP4</span>
-        </div>
-
-        <div style="margin-top:10px;">
-          <strong style="color:var(--muted)">Available formats</strong>
-          <div class="format-list" aria-hidden="false">
-            <span class="format-item">MP4</span>
-            <span class="format-item">WEBM</span>
-            <span class="format-item">MKV</span>
-            <span class="format-item">HLS (m3u8)</span>
-            <span class="format-item">DASH (mpd)</span>
-          </div>
-        </div>
-      </div>
-
-      <aside class="right-col">
-        <div class="player-card">
-          <div class="section-title">Open with External Player</div>
-          <p class="player-desc" style="margin:0 0 10px 0; color:var(--muted)">Tap a player to attempt to open the stream directly in the app. If it fails, the link will be copied to clipboard as fallback.</p>
-          <div class="player-grid" role="list">
-            <!-- Buttons for many players. Update images if necessary. -->
-            <button class="player-card-btn" data-player="vlc" title="Open in VLC (mobile/desktop)">
-              <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/vlc.png" alt="VLC">
-              <div>
-                <div class="player-name">VLC</div>
-                <div class="player-desc">Cross-platform</div>
-              </div>
-            </button>
-
-            <button class="player-card-btn" data-player="mx" title="Open in MX Player">
-              <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/mx.png" alt="MX">
-              <div>
-                <div class="player-name">MX Player</div>
-                <div class="player-desc">Android native</div>
-              </div>
-            </button>
-
-            <button class="player-card-btn" data-player="nplayer" title="Open in nPlayer">
-              <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/nPlayer.webp" alt="nPlayer">
-              <div>
-                <div class="player-name">nPlayer</div>
-                <div class="player-desc">iOS / Android</div>
-              </div>
-            </button>
-
-            <button class="player-card-btn" data-player="potplayer" title="Open in PotPlayer (Windows)">
-              <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/pot.png" alt="PotPlayer">
-              <div>
-                <div class="player-name">PotPlayer</div>
-                <div class="player-desc">Windows</div>
-              </div>
-            </button>
-
-            <button class="player-card-btn" data-player="mpc" title="Open in MPC-HC (Windows)">
-              <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/classic.png" alt="MPC-HC">
-              <div>
-                <div class="player-name">MPC-HC</div>
-                <div class="player-desc">Windows classic</div>
-              </div>
-            </button>
-
-            <button class="player-card-btn" data-player="km" title="Open in KMPlayer">
-              <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/km.webp" alt="KM">
-              <div>
-                <div class="player-name">KMPlayer</div>
-                <div class="player-desc">Desktop/Mobile</div>
-              </div>
-            </button>
-
-            <button class="player-card-btn" data-player="splayer" title="Open in SPlayer">
-              <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/splayer.webp" alt="SPlayer">
-              <div>
-                <div class="player-name">SPlayer</div>
-                <div class="player-desc">Lightweight</div>
-              </div>
-            </button>
-
-            <button class="player-card-btn" data-player="browser" title="Open in browser player">
-              <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/browser.png" alt="Browser">
-              <div>
-                <div class="player-name">Browser</div>
-                <div class="player-desc">Default</div>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        <div class="player-card">
-          <div class="section-title">Stream details</div>
-          <div style="display:flex; gap:8px; align-items:center; margin-top:8px;">
-            <div style="flex:1">
-              <div class="meta" style="margin-bottom:6px">Direct link</div>
-              <input id="direct-link" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:#dbeeff;" readonly value="{{ src_mp4 }}">
+    <div class="container">
+        <header class="header">
+            <div class="file-info">
+                <h1 id="file-name">RM Mσʋιҽ Fʅιx- {{ file_name }}</h1>
+                <div class="file-meta" role="group" aria-label="File metadata"></div>
             </div>
-          </div>
+        </header>
 
-          <div style="margin-top:12px">
-            <div class="meta">Supported formats</div>
-            <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap">
-              <span class="detail-pill">MP4</span>
-              <span class="detail-pill">WEBM</span>
-              <span class="detail-pill">MKV</span>
-              <span class="detail-pill">M3U8</span>
-            </div>
-          </div>
-        </div>
+        <main id="main-content">
+            <section class="player-container" aria-label="Video Player">
+                <video id="player" playsinline preload="metadata" controlsList="nodownload" aria-label="Video player">
+                    <source src="{{ src }}" type="video/mp4" />
+                    <p>Your browser does not support the video tag. Please <a href="{{ src }}" download>download the video</a> instead.</p>
+                </video>
+            </section>
 
-        <div class="player-card">
-          <div class="section-title">More options</div>
-          <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
-            <button id="btn-open-hls" class="btn secondary" title="Open HLS stream">Open HLS</button>
-            <button id="btn-open-dash" class="btn secondary" title="Open DASH stream">Open DASH</button>
-            <button id="btn-report" class="btn secondary" title="Report an issue">Report</button>
-          </div>
-        </div>
-
-      </aside>
-    </section>
-
-    <section class="about" aria-labelledby="about-h">
-      <h3 id="about-h" style="margin:0 0 6px 0; color:#fff">About & Contact</h3>
-      <p>Use this page for streaming to your channels and bots. Buttons below link to the recommended Telegram channels and bot utilities. Replace hrefs with your real TG links.</p>
-
-      <div class="tg-buttons">
-        <a class="tg-btn" href="https://t.me/YourChannel" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram-plane"></i> Channel</a>
-        <a class="tg-btn" href="https://t.me/YourBot" target="_blank" rel="noopener noreferrer"><i class="fas fa-robot"></i> Bot</a>
-        <a class="tg-btn" href="https://t.me/YourSupport" target="_blank" rel="noopener noreferrer"><i class="fas fa-headset"></i> Support</a>
-      </div>
-    </section>
+            <nav class="controls-section" aria-label="File options">
+                <div class="dropdown-container" id="stream-dropdown-container">
+                    <button type="button" class="action-button button-base secondary-button stream-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stream-menu" id="stream-btn-label">
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                        <span>Stream</span>
+                    </button>
+                    <div class="dropdown-menu" id="stream-menu" aria-labelledby="stream-btn-label" role="menu">
+                        <div class="stream-menu-header">
+                            <h3>Open with external player</h3>
+                            <button type="button" aria-label="Close menu" class="stream-menu-close button-base">
+                                <i class="fas fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="stream-menu-content">
+                            <div class="stream-category">
+                                <h4 class="category-heading"><i class="fas fa-mobile-screen-button" aria-hidden="true"></i> Mobile Players</h4>
+                                <div class="player-grid" role="group" aria-label="Mobile video players">
+                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="vlc">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/vlc.png" alt="VLC Mobile" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">VLC Mobile</span>
+                                    </button>
+                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="mxpro">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/mx.png" alt="MX Player Pro" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">MX Pro</span>
+                                    </button>
+                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="mx">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/mx.png" alt="MX Player" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">MX Player</span>
+                                    </button>
+                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="nplayer">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/nPlayer.webp" alt="nPlayer" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">nPlayer</span>
+                                    </button>
+                                     <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="splayer">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/splayer.webp" alt="S Player" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">S Player</span>
+                                    </button>
+                                     <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="km">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/km.webp" alt="KM Player" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">KM Player</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="stream-category">
+                                <h4 class="category-heading"><i class="fas fa-desktop" aria-hidden="true"></i> Desktop Players</h4>
+                                <div class="player-grid" role="group" aria-label="Desktop video players">
+                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="vlc-pc" title="Open in VLC Player (PC)">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/vlc.png" alt="VLC Player" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">VLC Player</span>
+                                    </button>
+                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="potplayer" title="Open in PotPlayer">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/pot.png" alt="PotPlayer" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">PotPlayer</span>
+                                    </button>
+                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="mpc" title="Open in MPC-HC">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/classic.png" alt="MPC-HC" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">MPC-HC</span>
+                                    </button>
+                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="kmpc" title="Open in KM Player (PC)">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/km.webp" alt="KM Player" loading="lazy" width="32" height="32" class="player-icon">
+                                        <span class="player-name">KM Player</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="action-button button-base secondary-button" title="Download the video" aria-label="Download video file">
+                    <i class="fas fa-cloud-download-alt" aria-hidden="true"></i>
+                    <span>Download</span>
+                </button>
+                <button type="button" class="action-button button-base secondary-button" title="Copy video link" aria-label="Copy video link to clipboard">
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                    <span>Copy Link</span>
+                </button>
+            </nav>
+        </main>
+    </div>
 
     <footer>
-      <p><span style="color:#9fd7ff">⚡ Thunder</span> © <span id="year"></span> — Built for streaming & bots</p>
+        <p><span id="thunder-text">⚡ RM Mσʋιҽ Fʅιx</span> © <span id="current-year"></span> | <a href="https://t.me/RahatMx" target="_blank" rel="noopener noreferrer" aria-label="View source code on GitHub"><i class="fab fa-github" aria-hidden="true"></i> <span>GitHub</span></a></p>
     </footer>
-  </div>
 
-  <div id="toast" class="toast" role="status" aria-live="polite">
-    <div class="icon"><i class="fas fa-info-circle"></i></div>
-    <div class="message">Action completed.</div>
-  </div>
+    <div class="toast" id="toast" role="alert" aria-live="polite" aria-atomic="true" aria-hidden="true">
+        <div class="toast-icon" aria-hidden="true">
+            <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="toast-message">Action completed.</div>
+    </div>
 
-  <!-- Scripts -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
-
-  <script>
-    // Template placeholders (in case you're not using server templating).
-    // If server filled them, these will be replaced already.
-    const FILE_NAME = "{{ file_name }}";
-    const SRC_MP4 = "{{ src_mp4 }}";     // primary
-    const SRC_WEBM = "{{ src_webm }}";   // alternate
-    const SRC_MKV = "{{ src_mkv }}";
-    const SUB_EN  = "{{ subtitle_en }}"; // optional
-    const SUB_BN  = "{{ subtitle_bn }}";
-    const FALLBACK_SIZE = "{{ file_size }}";
-    const HLS_SRC = "{{ src_hls }}"; // optional hls
-    const DASH_SRC = "{{ src_dash }}"; // optional dash
-
-    // DOM helpers
-    const toast = document.getElementById('toast');
-    function showToast(msg, timeout=2500){
-      toast.querySelector('.message').textContent = msg;
-      toast.classList.add('show');
-      setTimeout(()=> toast.classList.remove('show'), timeout);
-    }
-
-    // Plyr init
-    document.addEventListener('DOMContentLoaded', () => {
-      // create a plyr instance with quality/subtitles enabled
-      const player = new Plyr('#player', {
-        controls: ['play-large','play','progress','current-time','mute','volume','settings','pip','airplay','fullscreen'],
-        settings: ['quality','speed','loop'],
-        quality: { default: 0, options: [2160, 1440, 1080, 720, 480, 360]},
-        captions: { active: true, update: true, language: 'en' }
-      });
-
-      // show current quality when changed
-      player.on('qualitychange', ev => {
-        document.getElementById('current-quality').textContent = ev.detail.quality + 'p';
-      });
-
-      // fill views (random demo) - replace with real data if you have
-      document.getElementById('views-count').textContent = Math.floor(Math.random()*15000).toLocaleString();
-
-      // buttons
-      document.getElementById('btn-copy').addEventListener('click', () => {
-        navigator.clipboard.writeText(document.getElementById('direct-link').value).then(()=> showToast('Link copied to clipboard'));
-      });
-
-      document.getElementById('btn-download').addEventListener('click', () => {
-        const a = document.createElement('a');
-        a.href = SRC_MP4 || document.getElementById('direct-link').value;
-        a.download = FILE_NAME || 'video';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        showToast('Download started');
-      });
-
-      document.getElementById('btn-share').addEventListener('click', async () => {
-        const url = document.getElementById('direct-link').value;
-        if (navigator.share) {
-          try { await navigator.share({title: FILE_NAME, url}); showToast('Shared'); }
-          catch(e){ showToast('Share canceled'); }
-        } else {
-          navigator.clipboard.writeText(url).then(()=> showToast('Link copied for sharing'));
-        }
-      });
-
-      // External players behavior
-      const players = document.querySelectorAll('.player-card-btn');
-      players.forEach(btn => {
-        btn.addEventListener('click', async () => {
-          const playerName = btn.dataset.player;
-          const url = document.getElementById('direct-link').value;
-          // try deep link patterns for some players. These may not work in all browsers/platforms.
-          let tryUrl;
-          switch(playerName){
-            case 'vlc':
-              // try native VLC scheme then intent fallback
-              tryUrl = `vlc://${url}`;
-              // if on Android we can try intent: (some browsers block)
-              break;
-            case 'mx':
-              // MX Player deep link (attempt)
-              tryUrl = `mxplayer://${url}`;
-              break;
-            case 'nplayer':
-              tryUrl = `nplayer-${encodeURIComponent(url)}://`; // placeholder; many apps use custom schemes
-              break;
-            case 'potplayer':
-              tryUrl = `potplayer://${url}`;
-              break;
-            case 'mpc':
-              tryUrl = `mpc://${url}`;
-              break;
-            case 'km':
-              tryUrl = `kmplayer://${url}`;
-              break;
-            case 'splayer':
-              tryUrl = `splayer://${url}`;
-              break;
-            case 'browser':
-            default:
-              tryUrl = url;
-              break;
-          }
-
-          // Attempt to open deep link. If blocked, fallback to copy.
-          function openAndFallback(uri){
-            // Create hidden iframe trick (older approach)
-            const now = Date.now();
-            const opened = () => { /* no reliable cross-browser way */ };
-
-            // Try to open directly
-            window.location.href = uri;
-            // Fallback: copy original url to clipboard and notify user in 700ms
-            setTimeout(() => {
-              navigator.clipboard.writeText(url).then(()=> {
-                showToast('Could not open app — link copied to clipboard');
-              }).catch(()=> {
-                showToast('Could not open app — copy link manually');
-              });
-            }, 700);
-          }
-
-          try {
-            openAndFallback(tryUrl);
-          } catch (e) {
-            navigator.clipboard.writeText(url).then(()=> showToast('Link copied to clipboard'));
-          }
-        });
-      });
-
-      // Quality / subtitles controls quick UI hooks
-      document.getElementById('btn-subtitles').addEventListener('click', () => {
-        // open native captions menu
-        const menu = document.querySelector('.plyr__controls .plyr__menu'); // may vary
-        // toggle captions via API
-        const tracks = player.elements.media.textTracks || [];
-        if (tracks && tracks.length){
-          // Toggle next track
-          const current = Array.from(tracks).findIndex(t=>t.mode==='showing');
-          const next = (current + 1) % tracks.length;
-          Array.from(tracks).forEach((t,i)=> t.mode = (i===next) ? 'showing' : 'hidden');
-          showToast('Subtitle switched');
-        } else {
-          showToast('No subtitle tracks available');
-        }
-      });
-
-      // fetch filesize using HEAD (best-effort; requires CORS)
-      (async function tryFileSize(){
-        const fileUrl = document.getElementById('direct-link').value;
-        if (!fileUrl) return;
-        try {
-          const r = await fetch(fileUrl, { method: 'HEAD' });
-          if (r.ok){
-            const len = r.headers.get('content-length');
-            if (len) {
-              const pretty = formatBytes(parseInt(len, 10));
-              document.getElementById('file-size').textContent = 'Size: ' + pretty;
-            } else {
-              document.getElementById('file-size').textContent = 'Size: ' + (FALLBACK_SIZE || 'Unknown');
-            }
-          } else {
-            document.getElementById('file-size').textContent = 'Size: ' + (FALLBACK_SIZE || 'Unknown');
-          }
-        } catch (err){
-          document.getElementById('file-size').textContent = 'Size: ' + (FALLBACK_SIZE || 'Unknown');
-        }
-      })();
-
-      // open HLS / DASH buttons
-      document.getElementById('btn-open-hls').addEventListener('click', () => {
-        if (HLS_SRC && HLS_SRC.length){
-          window.open(HLS_SRC, '_blank');
-        } else {
-          showToast('No HLS stream available');
-        }
-      });
-      document.getElementById('btn-open-dash').addEventListener('click', () => {
-        if (DASH_SRC && DASH_SRC.length) window.open(DASH_SRC,'_blank');
-        else showToast('No DASH stream available');
-      });
-
-      // set year
-      document.getElementById('year').textContent = new Date().getFullYear();
-    });
-
-    // small utility
-    function formatBytes(bytes, decimals = 2) {
-      if (!+bytes) return '0 B';
-      const k = 1024, dm = decimals < 0 ? 0 : decimals, sizes = ['B','KB','MB','GB','TB','PB'];
-      const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
-    }
-
-  </script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/script.js" defer></script>
 </body>
 </html>
